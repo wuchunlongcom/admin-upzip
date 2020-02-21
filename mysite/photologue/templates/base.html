@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- Bootstrap -->
+		<link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="/static/css/screen.css" rel="stylesheet" media="screen">
+	    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	    <!--[if lt IE 9]>
+	      <script src="{{ STATIC_URL }}js/html5shiv.min.js"></script>
+	      <script src="{{ STATIC_URL }}js/respond.min.js"></script>
+	    <![endif]-->
+    </head>
+    <body>
+        <!-- Navigation -->
+		<nav class="navbar navbar-default" role="navigation">
+		  <!-- Brand and toggle get grouped for better mobile display -->
+		  <div class="navbar-header">
+		    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+		      <span class="sr-only">Toggle navigation</span>
+		      <span class="icon-bar"></span>
+		      <span class="icon-bar"></span>
+		      <span class="icon-bar"></span>
+		    </button>
+		    <a class="navbar-brand" href="/">Photologue project - {{ user.username }}</a>
+		  </div>
+		
+		  <!-- Collect the nav links, forms, and other content for toggling -->
+		  <div class="collapse navbar-collapse navbar-ex1-collapse">
+		    <ul class="nav navbar-nav">
+			    <li class="home"><a href="/">Home</a></li>
+			    {% if user in operators %}
+            
+            	{% endif %}
+            	<li><a href="/admin/">管理</a></li>
+
+			    
+			    <li class="photos dropdown">
+					<a data-target="#" href="" class="dropdown-toggle" data-toggle="dropdown">
+			            Photo views<b class="caret"></b>
+			        </a>
+					<ul class="dropdown-menu">
+						<li class="sub-page"><a href="{% url 'photologue:pl-photo-archive' %}">Date views</a></li>
+						<li class="sub-page"><a href="{% url 'photologue:photo-list' %}">List views</a></li>
+					</ul>
+				</li>
+
+				<li> <!-- 搜索框 如何居右? {# action= {% url 'search' %} #}-->
+              		<form method="post" action="" class="navbar-form navbar-left" rol="search">
+                		{% csrf_token %}
+                		<div class="form-group" >
+                  			<input name='q' type="text" class="form-control" placeholder="请输入关键词" />
+                		</div>
+                		<button type="submit" class="btn btn-default"><i class="fa fa-search"></i> 搜 索</button>
+            		</form>
+           		</li>
+		    </ul>
+		  </div><!-- /.navbar-collapse -->
+		</nav>
+    	<div class="container">
+        	{% block content %}{% endblock %}
+        </div>
+        <script src="/static/js/jquery.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
+		<script src="/static/js/project.js"></script>
+    </body>
+</html>
